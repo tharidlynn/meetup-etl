@@ -10,10 +10,14 @@ This project consists of 4 steps:
 
 ### 1. Get the Meetup events and load into PostgreSQL
 
+![meetup-erd](https://github.com/tharid007/meetup-etl/blob/master/img/meetup-erd.png?raw=true)
+
 1. Modify your environments in `api/.env`
 2. Run `cd api && ./init.sh`
 
 ### 2. Create our data warehouse and perform batching ETL 
+
+![meetup-dwh](https://github.com/tharid007/meetup-etl/blob/master/img/meetup-dwh.png?raw=true)
 
 1. In `dwh/setup/export_db.sql`, specify the date range in the `WHERE` clause so that we can experiment on incremental load
 2. Run `cd dwh && ./etl.sh`
@@ -62,9 +66,16 @@ HAVING
 5. Start our DAG 
 6. Now, Airflow will start performing incremental loads
 
-### 4. Setup Dashboard and analytics
+![meetup-check-quality](https://github.com/tharid007/meetup-etl/blob/master/img/meetup-check-quality.png?raw=true)
+
+With data_quality_check operator, we guarantee the results.
+
+### 4. Setup Dashboard, OLAP and analytics
 
 #### Dashboard
+I decided to use Metabase as the BI tools because it is n open source Business Intelligence server.
+
+[![meetup-dashboard](http://i.imgur.com/7YTMFQp.png)](https://vimeo.com/3514904 "Meetup Dashboard - Click to Watch!")
 
 #### Jupyter notebook
 
