@@ -10,14 +10,15 @@ This project consists of 4 steps:
 
 ### 1. Get the Meetup events and load into PostgreSQL
 
-![meetup-erd](https://github.com/tharid007/meetup-etl/blob/master/img/meetup-erd.png?raw=true)
+<img src="./img/meetup-erd.png" alt="meetup-erd" title="meetup-erd" width="400" height="500" />
+
 
 1. Modify your environments in `api/.env`
 2. Run `cd api && ./init.sh`
 
 ### 2. Create our data warehouse and perform batching ETL 
 
-![meetup-dwh](https://github.com/tharid007/meetup-etl/blob/master/img/meetup-dwh.png?raw=true)
+<img src="./img/meetup-dwh.png" alt="meetup-dwh" title="meetup-dwh" width="400" height="600" />
 
 1. In `dwh/setup/export_db.sql`, specify the date range in the `WHERE` clause so that we can experiment on incremental load
 2. Run `cd dwh && ./etl.sh`
@@ -37,6 +38,9 @@ HAVING
 ```
 
 ### 3. Incremental load with Apache Airflow 
+
+<img src="./img/meetup-dag.png" alt="meetup-dag" title="meetup-dag" />
+
 
 1. Copy every file in `meetup_dags` folder to your Airflow dag 
 2. Create the `sql_dwh_path` variable in Airflow UI and point that to your sql directory, e.g. `/Users/john/airflow/dags/sql`
@@ -66,9 +70,9 @@ HAVING
 5. Start our DAG 
 6. Now, Airflow will start performing incremental loads
 
-![meetup-check-quality](https://github.com/tharid007/meetup-etl/blob/master/img/meetup-check-quality.png?raw=true)
+<img src="./img/meetup-check-quality.png" alt="meetup-check-quality" title="meetup-check-quality" width="400" height="600" />
 
-With data_quality_check operator, we guarantee the results.
+With the data_quality_check operator, we can guarantee that every row has been inserted into dwh.
 
 ### 4. Setup Dashboard, OLAP and analytics
 
