@@ -10,7 +10,7 @@ This project consists of 4 steps:
 
 ### 1. Get the Meetup events and load into PostgreSQL
 
-<img src="./img/meetup-erd.png" alt="meetup-erd" title="meetup-erd" width="400" height="500" />
+<img src="./img/meetup-erd.png" alt="meetup-erd" title="meetup-erd" width="400" height="600" />
 
 
 1. Modify your environments in `api/.env`
@@ -70,7 +70,7 @@ HAVING
 5. Start our DAG 
 6. Now, Airflow will start performing incremental loads
 
-<img src="./img/meetup-check-quality.png" alt="meetup-check-quality" title="meetup-check-quality" width="400" height="600" />
+<img src="./img/meetup-check-quality.png" alt="meetup-check-quality" title="meetup-check-quality" />
 
 With the data_quality_check operator, we can guarantee that every row has been inserted into dwh.
 
@@ -79,7 +79,7 @@ With the data_quality_check operator, we can guarantee that every row has been i
 #### Dashboard
 I decided to use Metabase as the BI tools because it is n open source Business Intelligence server.
 
-[![meetup-dashboard](http://i.imgur.com/7YTMFQp.png)](https://vimeo.com/3514904 "Meetup Dashboard - Click to Watch!")
+[![meetup-dashboard](https://github.com/tharid007/meetup-etl/blob/master/img/meetup-dashboard-screenshot.png?raw=true)](https://vimeo.com/352247420 "Meetup Dashboard - Click to Watch!")
 
 #### Jupyter notebook
 
