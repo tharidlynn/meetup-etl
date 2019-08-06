@@ -1,0 +1,43 @@
+id,name
+1,Arts & Culture
+18,Book Clubs
+37,???chapter_category.business.name???
+2,Career & Business
+3,Cars & Motorcycles
+39,???chapter_category.classes.name???
+4,Community & Environment
+5,Dancing
+41,???chapter_category.dating.name???
+45,???chapter_category.description.name???
+6,Education & Learning
+8,Fashion & Beauty
+9,Fitness
+10,Food & Drink
+11,Games
+13,Movements & Politics
+14,Health & Wellbeing
+15,Hobbies & Crafts
+16,Language & Ethnic Identity
+12,LGBT
+17,Lifestyle
+20,Movies & Film
+21,Music
+22,New Age & Spirituality
+42,???chapter_category.one-on-one.name???
+23,Outdoors & Adventure
+24,Paranormal
+25,Parents & Family
+26,Pets & Animals
+27,Photography
+38,???chapter_category.products.name???
+43,???chapter_category.promotions.name???
+28,Religion & Beliefs
+29,Sci-Fi & Fantasy
+30,Singles
+31,Socializing
+32,Sports & Recreation
+33,Support
+34,Tech
+40,???chapter_category.track-singles.name???
+44,???chapter_category.venues.name???
+36,Writing
