@@ -72,7 +72,7 @@ HAVING
 
 <img src="./img/meetup-check-quality.png" alt="meetup-check-quality" title="meetup-check-quality" />
 
-With the data_quality_check operator, we can guarantee that every row has been inserted into dwh.
+_With the data-quality-check operator, we can guarantee that every row has been inserted into dwh._
 
 ### 4. Setup Dashboard, OLAP and analytics
 
