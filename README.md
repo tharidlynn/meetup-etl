@@ -44,7 +44,7 @@ HAVING
 
 1. Copy every file in `meetup_dags` folder to your Airflow dag 
 2. Create the `sql_dwh_path` variable in Airflow UI and point that to your sql directory, e.g. `/Users/john/airflow/dags/sql`
-3. create 2 connections in Airflow UI: `postgres_oltp` and `postgres_dwh`
+3. Create 2 connections in Airflow UI: `postgres_oltp` and `postgres_dwh`
 ```
 {
    "conn_id":"postgres_oltp",
@@ -77,14 +77,58 @@ With the data_quality_check operator, we can guarantee that every row has been i
 ### 4. Setup Dashboard, OLAP and analytics
 
 #### Dashboard
-I decided to use Metabase as the BI tools because it is n open source Business Intelligence server.
+I decided to use [Metabase](https://metabase.com) as the BI tool because it is an open source Business Intelligence server. You can click thumbnail below to see the demo video.
 
 [![meetup-dashboard](https://github.com/tharid007/meetup-etl/blob/master/img/meetup-dashboard-screenshot.png?raw=true)](https://vimeo.com/352247420 "Meetup Dashboard - Click to Watch!")
 
 #### Jupyter notebook
 
-1. `dataframe.ipynb`: example of using Pandas with Meetup events
-2. `sql.ipynb`: SQL analytics including OLAP and window functions
+1. `sql.ipynb`: SQL analytics including OLAP and window functions such as:
+
+```
+
+WITH cte AS (SELECT 
+    g.name AS group_name,
+    f.yes_rsvp_count,
+    CASE 
+        WHEN yes_rsvp_count > LAG(f.yes_rsvp_count, 1) OVER (
+        PARTITION BY g.name
+        ORDER BY f.event_date
+    ) THEN 1 ELSE 0 
+    END AS better
+FROM 
+    dwh.fact_event f
+    LEFT JOIN dwh.dim_group g ON f.group_key = g.group_key
+    LEFT JOIN dwh.dim_event e ON f.event_key = e.event_key
+)
+
+SELECT 
+    group_name,
+    COUNT(*) AS total_events,
+    SUM(better) AS total_better,
+    SUM(better)::Float / COUNT(*)::Float AS better_percentage
+FROM
+    cte
+GROUP BY
+    group_name
+ORDER BY 
+    SUM(better)::Float / COUNT(*)::Float DESC;
+
+```
+
+2. `dataframe.ipynb`: example of using Pandas with Meetup events such as:
+
+```
+group = pd.read_csv('dwh/data/group.export.csv')
+cat = pd.read_csv('dwh/data/category.export.csv')
+event = pd.read_csv('dwh/data/event.export.csv')
+
+event.sort_values('yes_rsvp_count', ascending=False)[['name', 'group_name', 'yes_rsvp_count']].head(10)
+
+event.groupby('group_name').agg({'yes_rsvp_count': ['sum', 'min', 'max', 'mean'], 'group_name': 'count'})
+
+```
+
 
 
 
